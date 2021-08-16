@@ -9,17 +9,17 @@ import Header from "./Components/Header/Header";
 import List from "./Components/List/List";
 import Map from "./Components/Map/Map";
 
-import { getPlacedData } from "./API";
+import { getPlacesData } from "./API";
 
 
 const App = () => {
 
   const [places, setPlaces] = useState([])
-  const [coordinates, setCoordinates] = useState({})
+  const [coordinates, setCoordinates] = useState({lat: 0, lng: 0})
   const [bounds, setBounds] = useState(null)
 
   useEffect(() => {
-    getPlacedData()
+    getPlacesData()
     .then((data) => {
       console.log(data);
       setPlaces(data)
