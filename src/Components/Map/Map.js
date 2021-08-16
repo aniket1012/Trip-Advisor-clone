@@ -8,6 +8,7 @@ import {
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import Rating from '@material-ui/lab'
 
+import useStyles from './styles'
 const Map = () => {
     return (
         <h1>
