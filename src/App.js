@@ -15,6 +15,7 @@ import { getPlacesData } from "./API";
 const App = () => {
 
   const [places, setPlaces] = useState([])
+
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState(null)
 
@@ -27,9 +28,11 @@ const App = () => {
   useEffect(() => {
     console.log(coordinates, bounds);
 
-    getPlacesData()
+    getPlacesData(bounds.sw, bounds.ne)
     .then((data) => {
       console.log(data);
+
+
       setPlaces(data)
     })
   }, [coordinates, bounds])
