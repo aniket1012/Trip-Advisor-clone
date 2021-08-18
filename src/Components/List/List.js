@@ -15,13 +15,15 @@ import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 const List = ({places}) => {
 
-    console.log(places);
+    // console.log(places);
     const [type, setType] = useState('restaurants')
     const [rating, setRating] = useState('')
 
-   
+
 
     const classes = useStyles()
+
+
     return (
         <div className={classes.container}>
             <Typography variant='h4'> Restaurants, Hotels, & Attractions around you</Typography>
