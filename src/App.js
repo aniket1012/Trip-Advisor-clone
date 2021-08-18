@@ -38,14 +38,14 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <CssBaseline/>
-      <Header/>
-      <Grid container spacing={3} style={{width: '100%'}}>
+      <CssBaseline />
+      <Header />
+      <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
-          <List places={places}/>
+          <List places={places} childClicked={childClicked} />
         </Grid>
         <Grid item xs={12} md={8}>
-          <Map 
+          <Map
             setCoordinates={setCoordinates}
             setBounds={setBounds}
             coordinates={coordinates}
@@ -54,7 +54,6 @@ const App = () => {
           />
         </Grid>
       </Grid>
-    
     </React.Fragment>
   );
 }

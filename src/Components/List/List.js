@@ -13,7 +13,7 @@ import useStyles from './styles'
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 
-const List = ({places}) => {
+const List = ({places, childClicked}) => {
 
 
     const [type, setType] = useState('restaurants')
