@@ -18,9 +18,11 @@ import {
 import { Place } from '@material-ui/icons';
 
 
-const PlaceDetails = ({place}) => {
+const PlaceDetails = ({place, selected, refProp}) => {
 
     const classes = useStyles()
+
+    if(selected) refProp?.current?.scrollIntoView({behavior: 'smooth', block: 'start'})
 
     // console.log(place);
     return (
