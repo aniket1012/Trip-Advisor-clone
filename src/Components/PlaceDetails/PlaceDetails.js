@@ -64,6 +64,7 @@ const PlaceDetails = ({place, selected, refProp}) => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
+        
             >
               <img src={award.images.small} alt={award.display_name} />
               <Typography variant="subtitle2" color="textSecondary">
@@ -71,7 +72,7 @@ const PlaceDetails = ({place, selected, refProp}) => {
               </Typography>
             </Box>
           ))}
-          {place?.cuisine?.map((name) => (
+          {place?.cuisine?.map((name, i) => (
             <Chip
               key={name}
               size="small"

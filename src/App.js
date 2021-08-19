@@ -13,17 +13,18 @@ import { getPlacesData } from "./API";
 
 
 const App = () => {
-
-  const [places, setPlaces] = useState([])
-  const [filteredPlaces, setfilteredPlaces] = useState([])
-  const [childClicked, setChildClicked] = useState(null);
+  const [type, setType] = useState("restaurants");
+  const [rating, setRating] = useState("");
 
   const [coordinates, setCoordinates] = useState({})
   const [bounds, setBounds] = useState({})
 
+  const [filteredPlaces, setFilteredPlaces] = useState([])
+  const [places, setPlaces] = useState([])
+
+   const [autocomplete, setAutocomplete] = useState(null);
+  const [childClicked, setChildClicked] = useState(null);
   const [isLoading, setisLoading] = useState(false)
-  const [type, setType] = useState("restaurants");
-  const [rating, setRating] = useState("");
  
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(({coords: {latitude, longitude}}) => {
@@ -34,26 +35,41 @@ const App = () => {
   useEffect(() => {
     const filteredPlaces = places.filter((place) =>  place.rating > rating)
 
-    setfilteredPlaces(filteredPlaces)
+    setFilteredPlaces(filteredPlaces)
 
   }, [rating])
 
   useEffect(() => {
-    setisLoading(true)
-    getPlacesData(type, bounds.sw, bounds.ne)
-      .then((data) => {
-        setPlaces(data)
-        setfilteredPlaces([])
-        setisLoading(false)
-      })
-   
-  }, [type, coordinates, bounds])
+    if(bounds.sw && bounds.ne) {
+      setisLoading(true)
+      
+      getPlacesData(type, bounds.sw, bounds.ne)
+        .then((data) => {
+          setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+          setFilteredPlaces([])
+          setisLoading(false)
+        })
+
+    }
+  }, [type, bounds])
+
+  const onLoad = (autoC) => setAutocomplete(autoC);
+
+  const onPlaceChanged = () => {
+    const lat = autocomplete.getPlace().geometry.location.lat();
+    const lng = autocomplete.getPlace().geometry.location.lng();
+
+    setCoordinates({ lat, lng });
+  };
 
 
   return (
     <React.Fragment>
       <CssBaseline />
-      <Header />
+      <Header 
+        onPlaceChanged={onPlaceChanged}
+        onLoad={onLoad}
+      />
       <Grid container spacing={3} style={{ width: "100%" }}>
         <Grid item xs={12} md={4}>
           <List
