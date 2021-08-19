@@ -13,17 +13,16 @@ import useStyles from './styles'
 import PlaceDetails from '../PlaceDetails/PlaceDetails'
 
 
-const List = ({places, childClicked, isLoading}) => {
+const List = ({places, childClicked, isLoading, type, setType, rating, setRating}) => {
 
 
     const classes = useStyles()
-    const [type, setType] = useState('restaurants')
-    const [rating, setRating] = useState('')
+    
     const [elRefs, setElRefs] = useState([])
 
 
     useEffect(() => {
-        const refs = Array(places.length).fill().map(( _, i)=> refs[i] || createRef())
+        const refs = Array(places?.length).fill().map(( _, i)=> refs[i] || createRef())
         
         setElRefs(refs)
     }, [places])
@@ -55,19 +54,19 @@ const List = ({places, childClicked, isLoading}) => {
                             <MenuItem value={4.5}>Above 4.5</MenuItem>
                         </Select>
                     </FormControl>
+                    <Grid container spacing={3} className={classes.list}>
+                        {places.map((place, i) => (
+                            <Grid item key={i} xs={12}>
+                            <PlaceDetails 
+                                place={place}
+                                selected={Number(childClicked )=== i}
+                                refProp={elRefs[i]}
+                                />
+                        </Grid>
+                        ))}
+                    </Grid>
                 </React.Fragment>
             )}
-            <Grid container spacing={3} className={classes.list}>
-                {places.map((place, i) => (
-                <Grid item key={i} xs={12}>
-                    <PlaceDetails 
-                        place={place}
-                        selected={Number(childClicked )=== i}
-                        refProp={elRefs[i]}
-                    />
-                </Grid>
-                ))}
-            </Grid>
         </div>
     )
 }
