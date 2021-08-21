@@ -23,7 +23,7 @@ const PlaceDetails = ({place, selected, refProp}) => {
     const classes = useStyles()
 
     if(selected) refProp?.current?.scrollIntoView({behavior: 'smooth', block: 'start'})
-    
+
     return (
       <Card elevation={6}>
         <CardMedia
@@ -39,10 +39,13 @@ const PlaceDetails = ({place, selected, refProp}) => {
           <Typography gutterBottom variant="h5">
             {place.name}
           </Typography>
-          <Box display="flex" justifyContent="space-between">
+          <Box display="flex" justifyContent="space-between" my={2}>
             <Rating size="small" value={Number(place.rating)} readOnly />
-            <Typography gutterBottom variant="subtitle1">
+            {/* <Typography gutterBottom variant="subtitle1">
               Out of {place.num_reviews} Reviews
+            </Typography> */}
+            <Typography component="legend">
+              {place.num_reviews} review{place.num_reviews > 1 && "s"}
             </Typography>
           </Box>
           <Box display="flex" justifyContent="space-between">
@@ -63,7 +66,6 @@ const PlaceDetails = ({place, selected, refProp}) => {
               display="flex"
               justifyContent="space-between"
               alignItems="center"
-        
             >
               <img src={award.images.small} alt={award.display_name} />
               <Typography variant="subtitle2" color="textSecondary">
@@ -71,7 +73,7 @@ const PlaceDetails = ({place, selected, refProp}) => {
               </Typography>
             </Box>
           ))}
-          {place?.cuisine?.map((name, i) => (
+          {place?.cuisine?.map(({name}) => (
             <Chip
               key={name}
               size="small"
