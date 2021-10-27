@@ -1,0 +1,43 @@
+2021-10-27 10:20:57,139 INFO {RepoConnector.java:87} [--] Repo connector version is 1.7.9
+2021-10-27 10:20:57,144 INFO {RepoConnector.java:89} [--] Configuration is cfg
+2021-10-27 10:20:58,286 INFO {RepositoryFactoryImpl.java:49} [--] Repository factory configuration are reading...
+2021-10-27 10:20:58,288 INFO {RepositoryFactoryImpl.java:55} [--] Repository factory configuration are read successfully. There are 6 specific connectors
+2021-10-27 10:20:58,306 INFO {ConfigRepositoryDataProviderImpl.java:86} [--] Repository configurations are reading...
+2021-10-27 10:20:58,345 INFO {ConfigRepositoryDataProviderImpl.java:127} [--] Repository RepositoryKey[type=GIT,protocol=HTTPS,host=github.com,path=aniket1012/Trip-Advisor-clone,branch=<null>] are added, alias github_test, project 94f4cfac3, auth type null
+2021-10-27 10:20:58,353 INFO {ConfigRepositoryDataProviderImpl.java:127} [--] Repository RepositoryKey[type=GIT,protocol=HTTPS,host=user.git.beanstalkapp.com,path=repository.git,branch=<null>] are added, alias beanstalkapp_test, project projectId, auth type null
+2021-10-27 10:20:58,354 INFO {ConfigRepositoryDataProviderImpl.java:129} [--] Repository configurations are read successfully. There are 2 repositories
+2021-10-27 10:21:00,472 WARN {BrokerService.java:2004} [--] Store limit is 102400 mb (current store usage is 0 mb). The data directory: /Users/aniketpatel/Personal Projects/travel_advisor/repo-connector-1.7.9/cfg/activemq-data/localhost/KahaDB only has 65597 mb of usable space - resetting to maximum available disk space: 65597 mb
+2021-10-27 10:21:00,611 INFO {QueueImportDataListener.java:49} [--] Importer com.smartling.repoconnector.services.importer.Vcs2SmartlingImporterImpl@26ca61bf is assigned to handle PushImportRequest data
+2021-10-27 10:21:00,611 INFO {QueueImportDataListener.java:49} [--] Importer com.smartling.repoconnector.services.importer.Smartling2VcsImporterImpl@cedee22 is assigned to handle TranslationImportRequest data
+2021-10-27 10:21:00,612 INFO {QueueImportDataListener.java:49} [--] Importer com.smartling.repoconnector.services.scheduler.RepositoryPollingImporterImpl@78307a56 is assigned to handle PollImportRequest data
+2021-10-27 10:21:00,737 INFO {BrokerManager.java:89} [--] Repository Connector is starting
+2021-10-27 10:21:00,738 INFO {ActiveMQProvider.java:45} [--] Queue is started
+2021-10-27 10:21:01,319 INFO {HTTPSJerseyListener.java:68} [--] HTTP listener is started on http://0.0.0.0:5555
+2021-10-27 10:21:01,331 INFO {BrokerManager.java:95} [--] Metrics reposter is started. Output dir: cfg/metrics
+2021-10-27 10:21:01,331 INFO {BrokerManager.java:97} [--] Repository Connector successfully started
+2021-10-27 10:21:01,332 INFO {RepoConnector.java:213} [--] Repository Connector is starting
+2021-10-27 10:21:01,332 INFO {RepoConnector.java:214} [--] Checking health...
+2021-10-27 10:21:01,333 INFO {RepoConnector.java:311} [--] ActiveMQProvider is OK, parameters {handledConnections=0, connections=0, uptime=1.159 seconds}
+2021-10-27 10:21:01,333 INFO {RepoConnector.java:311} [--] HTTPSJerseyListener is OK
+2021-10-27 10:21:01,593 ERROR {AbstractRepositoryConnector.java:95} [projectId-RepositoryKey[type=GIT,protocol=HTTPS,host=user.git.beanstalkapp.com,path=repository.git,branch=<null>]-] Repository error
+org.eclipse.jgit.api.errors.TransportException: https://user.git.beanstalkapp.com/repository.git: Authentication is required but no CredentialsProvider has been registered
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:220) ~[org.eclipse.jgit-4.3.0.201604071810-r.jar:4.3.0.201604071810-r]
+	at org.eclipse.jgit.api.LsRemoteCommand.call(LsRemoteCommand.java:159) ~[org.eclipse.jgit-4.3.0.201604071810-r.jar:4.3.0.201604071810-r]
+	at com.smartling.repoconnector.services.vcs.git.GitRepositoryConnector.getBranches(GitRepositoryConnector.java:460) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+	at com.smartling.repoconnector.services.vcs.git.GitRepositoryConnector.checkAccess(GitRepositoryConnector.java:440) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+	at com.smartling.repoconnector.services.vcs.RepositoryFactoryImpl.validateAllRepositories(RepositoryFactoryImpl.java:110) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+	at com.smartling.repoconnector.services.manager.BrokerManager.check(BrokerManager.java:84) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+	at com.smartling.repoconnector.RepoConnector.start(RepoConnector.java:215) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+	at com.smartling.repoconnector.RepoConnector.main(RepoConnector.java:92) [repo-connector-1.7.9.jar:1.0.0-SNAPSHOT]
+Caused by: org.eclipse.jgit.errors.TransportException: https://user.git.beanstalkapp.com/repository.git: Authentication is required but no CredentialsProvider has been registered
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:484) ~[org.eclipse.jgit-4.3.0.201604071810-r.jar:4.3.0.201604071810-r]
+	at org.eclipse.jgit.transport.TransportHttp.openFetch(TransportHttp.java:288) ~[org.eclipse.jgit-4.3.0.201604071810-r.jar:4.3.0.201604071810-r]
+	at org.eclipse.jgit.api.LsRemoteCommand.execute(LsRemoteCommand.java:198) ~[org.eclipse.jgit-4.3.0.201604071810-r.jar:4.3.0.201604071810-r]
+	... 7 common frames omitted
+2021-10-27 10:21:01,593 WARN {RepoConnector.java:320} [projectId-RepositoryKey[type=GIT,protocol=HTTPS,host=user.git.beanstalkapp.com,path=repository.git,branch=<null>]-] Repository RepositoryKey[type=GIT,protocol=HTTPS,host=user.git.beanstalkapp.com,path=repository.git,branch=<null>] isn't working, error: https://user.git.beanstalkapp.com/repository.git: Authentication is required but no CredentialsProvider has been registered
+2021-10-27 10:21:02,029 INFO {GitRepositoryConnector.java:442} [94f4cfac3-RepositoryKey[type=GIT,protocol=HTTPS,host=github.com,path=aniket1012/Trip-Advisor-clone,branch=<null>]-] Repository is accessible
+2021-10-27 10:21:02,793 INFO {RepoConnector.java:311} [94f4cfac3-RepositoryKey[type=GIT,protocol=HTTPS,host=github.com,path=aniket1012/Trip-Advisor-clone,branch=<null>]-] Repository RepositoryKey[type=GIT,protocol=HTTPS,host=github.com,path=aniket1012/Trip-Advisor-clone,branch=<null>] is OK
+2021-10-27 10:21:02,793 INFO {RepoConnector.java:223} [--] The health is OK
+2021-10-27 10:21:02,796 INFO {RepositoryFactoryImpl.java:148} [projectId-RepositoryKey[type=GIT,protocol=HTTPS,host=user.git.beanstalkapp.com,path=repository.git,branch=<null>]-VCS2SMARTLING] Pooling task is scheduled with cron expression 0 */5 * * * ?
+2021-10-27 10:21:02,797 INFO {RepositoryFactoryImpl.java:148} [94f4cfac3-RepositoryKey[type=GIT,protocol=HTTPS,host=github.com,path=aniket1012/Trip-Advisor-clone,branch=<null>]-VCS2SMARTLING] Pooling task is scheduled with cron expression 0 */3 * * * ?
+2021-10-27 10:21:02,798 INFO {RepoConnector.java:225} [--] Periodical tasks are scheduled

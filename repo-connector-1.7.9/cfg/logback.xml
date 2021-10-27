@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <appender name="OPERATION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logback_logs_path}/repo-connector_operational.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logback_logs_path}/repo-connector_operational.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>1</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level [%thread] {%file:%line} [%X{projectId}-%X{repositoryKey}-%X{type}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="MAIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logback_logs_path}/repo-connector.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${logback_logs_path}/repo-connector.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%date %level {%file:%line} [%X{projectId}-%X{repositoryKey}-%X{type}] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    		<encoder>
+            <pattern>%date %level [%X{projectId}-%X{repositoryKey}] %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="EXT" class="com.smartling.connectors.appenders.logback.ExternalAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>[%thread] {%file:%line} %msg%n</pattern>
+        </layout>
+        <channel>repo-connector</channel>
+    </appender>
+
+    <logger name="org.jboss.resteasy" level="ERROR" additivity="false">
+        <appender-ref ref="MAIN" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="EXT" />
+    </logger>
+
+
+    <logger name="com.smartling.repoconnector"  level="TRACE" additivity="false">
+        <!--<appender-ref ref="OPERATION" />-->
+        <appender-ref ref="MAIN" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="EXT" />
+    </logger>
+
+    <root level="WARN">
+        <!-- <appender-ref ref="OPERATION" /> -->
+        <appender-ref ref="MAIN" />
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="EXT" />
+    </root>
+</configuration>
